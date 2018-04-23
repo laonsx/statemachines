@@ -38,4 +38,15 @@ func (machine *MinerStateMachine) RevertToPreviousState() {
 
 func (machine *MinerStateMachine) HandleMessage() bool {
 
+	if machine.CurrState != nil && machine.CurrState.OnMessage(machine.Owner) {
+
+		return true
+	}
+
+	if machine.GlobalState != nil && machine.GlobalState.OnMessage(machine.Owner) {
+
+		return true
+	}
+
+	return false
 }

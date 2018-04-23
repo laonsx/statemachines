@@ -18,5 +18,5 @@ func (miner *Miner) Update() {
 
 func (miner *Miner) HandleMessage() bool {
 
-	return false
+	return miner.Machine.HandleMessage()
 }
