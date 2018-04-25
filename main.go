@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/laonsx/statemachines/westworld/baseentity"
-	"github.com/laonsx/statemachines/westworld/state"
 	"github.com/laonsx/statemachines/westworld/statemachine"
+	"github.com/laonsx/statemachines/westworld/state"
 )
 
 func main() {
@@ -16,6 +16,8 @@ func main() {
 		CurrState: state.MinerEnterMineAndDigForNuggetState,
 	}
 	miner.Machine = machine
+
+	//miner := miner.InitMiner()
 	for i := 0; i < 100; i++ {
 
 		miner.Update()
