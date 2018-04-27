@@ -1,25 +1,68 @@
 package sence
 
+import (
+	"sort"
+)
+
+//func InitPriorityQueue() {
+//	heap.Init(messageQueue)
+//}
+
+var messageQueue PriorityQueue
+
 type PriorityQueue []*Telegram
 
-func (queue PriorityQueue) Begin() *Telegram {
-	if queue.Count() > 0 {
-		return queue[0]
-	}
-	return nil
-}
+func (queue PriorityQueue) Len() int {
 
-func (queue PriorityQueue) Count() int {
 	return len(queue)
 }
 
-func (queue *PriorityQueue) Insert() {
+func (queue PriorityQueue) Less(i, j int) bool {
 
+	return queue[i].DispathTime < queue[j].DispathTime
+}
+
+func (queue PriorityQueue) Swap(i, j int) {
+
+	queue[i], queue[j] = queue[j], queue[i]
+}
+
+func (queue PriorityQueue) HaveNewDispatchMessage(currTime int64) bool {
+
+	if queue.Len() == 0 {
+
+		return false
+	}
+
+	if queue[0].DispathTime > currTime {
+
+		return false
+	}
+
+	return true
+}
+
+func (queue *PriorityQueue) Push(telegram *Telegram) {
+
+	*queue = append(*queue, telegram)
+	sort.Sort(*queue)
+}
+
+func (queue *PriorityQueue) Pop() *Telegram {
+
+	telegram := (*queue)[0]
+	*queue = (*queue)[1:]
+
+	return telegram
 }
 
 func DispatchMessage(delay int64, receiver, sender int, msg Message) bool {
 
 	return true
+}
+
+func DispatchDelayMessage() {
+
 }
 
 type Telegram struct {
