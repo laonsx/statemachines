@@ -11,6 +11,11 @@ type Miner struct {
 	Fatigue     int
 }
 
+func (miner *Miner) GetId() int {
+
+	return miner.Id
+}
+
 func (miner *Miner) Update() {
 
 	miner.Machine.Update()

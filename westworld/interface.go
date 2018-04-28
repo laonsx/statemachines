@@ -1,6 +1,7 @@
 package westworld
 
 type BaseEntity interface {
+	GetId() int
 	Update()
 	HandleMessage() bool
 }

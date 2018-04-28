@@ -1,18 +1,25 @@
 package baseentity
 
-import "github.com/laonsx/statemachines/westworld"
+import (
+	"github.com/laonsx/statemachines/westworld"
+)
 
 type Elsa struct {
 	Id          int
 	Machine     westworld.StateMachine
 }
 
-func (miner *Elsa) Update() {
+func (slsa *Elsa) GetId() int {
 
-	miner.Machine.Update()
+	return slsa.Id
 }
 
-func (miner *Elsa) HandleMessage() bool {
+func (slsa *Elsa) Update() {
 
-	return miner.Machine.HandleMessage()
+	slsa.Machine.Update()
+}
+
+func (slsa *Elsa) HandleMessage() bool {
+
+	return slsa.Machine.HandleMessage()
 }
