@@ -5,21 +5,22 @@ import (
 )
 
 type Elsa struct {
-	Id          int
-	Machine     westworld.StateMachine
+	Id       int
+	Machine  westworld.StateMachine
+	CookTime int
 }
 
-func (slsa *Elsa) GetId() int {
+func (elsa *Elsa) GetId() int {
 
-	return slsa.Id
+	return elsa.Id
 }
 
-func (slsa *Elsa) Update() {
+func (elsa *Elsa) Update() {
 
-	slsa.Machine.Update()
+	elsa.Machine.Update()
 }
 
-func (slsa *Elsa) HandleMessage() bool {
+func (elsa *Elsa) HandleMessage(msg interface{}) bool {
 
-	return slsa.Machine.HandleMessage()
+	return elsa.Machine.HandleMessage(msg)
 }

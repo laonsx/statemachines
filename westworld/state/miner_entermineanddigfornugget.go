@@ -54,7 +54,7 @@ func (state *minerEnterMineAndDigForNuggetState) Exit(role westworld.BaseEntity)
 	fmt.Println("Exit MinerEnterMineAndDigForNuggetState")
 }
 
-func (state *minerEnterMineAndDigForNuggetState) OnMessage(role westworld.BaseEntity) bool {
+func (state *minerEnterMineAndDigForNuggetState) OnMessage(role westworld.BaseEntity, msg interface{}) bool {
 
 	return false
 }

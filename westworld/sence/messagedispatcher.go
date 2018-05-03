@@ -1,8 +1,11 @@
 package sence
 
 import (
+	"fmt"
 	"sort"
 	"time"
+
+	"github.com/laonsx/statemachines/westworld"
 )
 
 var messageQueue PriorityQueue
@@ -53,19 +56,36 @@ func (queue *PriorityQueue) Pop() *Telegram {
 	return telegram
 }
 
-func DispatchMessage(receiver, sender int, msg Message) bool {
+func DispatchMessage(receiverId, senderId int, msg Message) bool {
 
-	return true
+	receiver, _ := EntityManager.Load(receiverId)
+	if receiver == nil {
+
+		fmt.Println("..1")
+		return false
+	}
+
+	if entity, ok := receiver.(westworld.BaseEntity); ok {
+		fmt.Println("..3")
+		return entity.HandleMessage(&Telegram{
+			DispathTime: 0,
+			Receiver:    receiverId,
+			Sender:      senderId,
+			Msg:         msg,
+		})
+	}
+	fmt.Println("..2")
+	return false
 }
 
 func DispatchDelayMessage(delay int64, receiver, sender int, msg Message) {
 
 	currTime := time.Now().Unix()
 	messageQueue.Push(&Telegram{
-		DispathTime:currTime+delay,
-		Receiver:receiver,
-		Sender:sender,
-		Msg:msg,
+		DispathTime: currTime + delay,
+		Receiver:    receiver,
+		Sender:      sender,
+		Msg:         msg,
 	})
 }
 
@@ -78,7 +98,7 @@ type Telegram struct {
 type Message = int
 
 const (
-	MSG_TEST1 Message = iota+1000
+	MSG_TEST1 Message = iota + 1000
 	MSG_TEST2
 	MSG_TEST3
 	MSG_TEST4

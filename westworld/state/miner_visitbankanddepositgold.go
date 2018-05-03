@@ -34,7 +34,7 @@ func (state *minerVisitBankAndDepostGoldState) Exit(role westworld.BaseEntity) {
 	fmt.Println("Exit MinerVisitBankAndDepostGoldState")
 }
 
-func (state *minerVisitBankAndDepostGoldState) OnMessage(role westworld.BaseEntity) bool {
+func (state *minerVisitBankAndDepostGoldState) OnMessage(role westworld.BaseEntity, msg interface{}) bool {
 
 	return false
 }

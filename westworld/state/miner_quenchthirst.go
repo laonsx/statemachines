@@ -33,7 +33,7 @@ func (state *minerQuenchThirstState) Exit(role westworld.BaseEntity) {
 	fmt.Println("Exit MinerQuenchThirstState")
 }
 
-func (state *minerQuenchThirstState) OnMessage(role westworld.BaseEntity) bool {
+func (state *minerQuenchThirstState) OnMessage(role westworld.BaseEntity, msg interface{}) bool {
 
 	return false
 }

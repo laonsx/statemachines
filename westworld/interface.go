@@ -3,19 +3,19 @@ package westworld
 type BaseEntity interface {
 	GetId() int
 	Update()
-	HandleMessage() bool
+	HandleMessage(msg interface{}) bool
 }
 
 type StateMachine interface {
 	Update()
 	ChangeState(newState State)
 	RevertToPreviousState()
-	HandleMessage() bool
+	HandleMessage(msg interface{}) bool
 }
 
 type State interface {
 	Enter(role BaseEntity)
 	Execute(role BaseEntity)
 	Exit(role BaseEntity)
-	OnMessage(role BaseEntity) bool
+	OnMessage(role BaseEntity, msg interface{}) bool
 }

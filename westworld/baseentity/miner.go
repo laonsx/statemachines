@@ -21,7 +21,7 @@ func (miner *Miner) Update() {
 	miner.Machine.Update()
 }
 
-func (miner *Miner) HandleMessage() bool {
+func (miner *Miner) HandleMessage(msg interface{}) bool {
 
-	return miner.Machine.HandleMessage()
+	return miner.Machine.HandleMessage(msg)
 }

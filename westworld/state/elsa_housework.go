@@ -1,8 +1,9 @@
 package state
 
 import (
-	"github.com/laonsx/statemachines/westworld"
 	"fmt"
+	"github.com/laonsx/statemachines/westworld"
+	"github.com/laonsx/statemachines/westworld/baseentity"
 )
 
 var ElsaHouseWorkState *elsaHouseWorkState
@@ -25,7 +26,9 @@ func (state *elsaHouseWorkState) Exit(role westworld.BaseEntity) {
 	fmt.Println("Exit ElsaHouseWorkState")
 }
 
-func (state *elsaHouseWorkState) OnMessage(role westworld.BaseEntity) bool {
+func (state *elsaHouseWorkState) OnMessage(role westworld.BaseEntity, msg interface{}) bool {
 
-	return false
+	elsa := role.(*baseentity.Elsa)
+	elsa.Machine.ChangeState(ElsaCookStewState)
+	return true
 }

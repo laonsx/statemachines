@@ -5,6 +5,7 @@ import (
 
 	"github.com/laonsx/statemachines/westworld"
 	"github.com/laonsx/statemachines/westworld/baseentity"
+	"github.com/laonsx/statemachines/westworld/sence"
 )
 
 var MinerGoHomeAndSleepTilRestedState *minerGoHomeAndSleepTilRestedState
@@ -13,6 +14,8 @@ type minerGoHomeAndSleepTilRestedState struct {
 }
 
 func (state *minerGoHomeAndSleepTilRestedState) Enter(role westworld.BaseEntity) {
+
+	sence.DispatchMessage(202, 101, sence.MSG_TEST1)
 
 	fmt.Println("Enter MinerGoHomeAndSleepTilRestedState")
 }
@@ -38,7 +41,7 @@ func (state *minerGoHomeAndSleepTilRestedState) Exit(role westworld.BaseEntity) 
 	fmt.Println("Exit MinerGoHomeAndSleepTilRestedState")
 }
 
-func (state *minerGoHomeAndSleepTilRestedState) OnMessage(role westworld.BaseEntity) bool {
+func (state *minerGoHomeAndSleepTilRestedState) OnMessage(role westworld.BaseEntity, msg interface{}) bool {
 
 	return false
 }
